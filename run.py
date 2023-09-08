@@ -46,4 +46,16 @@ def validate_data(values):
         return False
     return True
 
+def update_sales_worksheet(data):
+    """
+    updates sales data worksheet, adds new row with user data
+    """
+    print('updating sales data\n')
+    sales_worksheet=SHEET.worksheet('sales')
+    sales_worksheet.append_row(data)
+    print('sales worsheet updated succesfully\n')
+
 data=get_sales_data()
+#Converts validated user input data to integers and store it in sales_data array
+sales_data=[int(value) for value in data]
+update_sales_worksheet(sales_data)
