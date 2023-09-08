@@ -48,14 +48,14 @@ def validate_data(values):
         return False
     return True
 
-def update_sales_worksheet(data):
+def update_worksheet(data,worksheet):
     """
-    updates sales data worksheet, adds new row with user data
+    updates selected worksheet, adds new row in data
     """
-    print('updating sales data\n')
-    sales_worksheet=SHEET.worksheet('sales')
-    sales_worksheet.append_row(data)
-    print('sales worsheet updated succesfully\n')
+    print(f'updating {worksheet} data\n')
+    updated_worksheet=SHEET.worksheet(worksheet)
+    updated_worksheet.append_row(data)
+    print(f'{worksheet} worsheet updated succesfully\n')
 
 def calculate_surplus_data(sales_row):
     """
@@ -74,15 +74,6 @@ def calculate_surplus_data(sales_row):
         surplus_data.append(surplus)
     return(surplus_data)
 
-def update_surplus_worksheet(surplus_row):
-    """
-    updates surplus worksheet
-    """
-    surplus_worksheet=SHEET.worksheet('surplus')
-    print('updating surplus worksheet\n')
-    surplus_worksheet.append_row(surplus_row)
-    print('surplus worksheet updated succesfully')
-
 def main():
     """
     Runs all program functions
@@ -90,9 +81,9 @@ def main():
     data=get_sales_data()
     #Converts validated user input data to integers and store it in sales_data array
     sales_data=[int(value) for value in data]
-    update_sales_worksheet(sales_data)
+    update_worksheet(sales_data,'sales')
     new_surplus_data=calculate_surplus_data(sales_data)
-    update_surplus_worksheet(new_surplus_data)
+    update_worksheet(new_surplus_data,'surplus')
 
 print('welcome to love sandwiches project')
 main()
